@@ -37,5 +37,6 @@ jobs:
         with:
           actions: 'update-comment'
           token: ${{ secrets.TOKEN }}
+          issue-number: 1
           comment-id: "1592555919"
           emoji: 'eyes'
