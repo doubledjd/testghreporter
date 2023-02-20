@@ -19,15 +19,14 @@ jobs:
       - name: my-step
         run: echo "Hello World!"
       - name: Update issue
-          uses: actions-cool/issues-helper@v3
-          with:
-            actions: 'update-issue'
-            token: ${{ secrets.TOKEN }}
-            issue-number: 1
-            state: 'open'
-            title: 'Updated the issue'
-            body: 'new body'
-            update-mode: 'replace'
-            labels: 'xx'
-            assignees: 'xxx'
-            emoji: '+1'
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'update-issue'
+          token: ${{ secrets.TOKEN }}
+          issue-number: 1
+          state: 'open'
+          title: 'Updated the issue'
+          body: 'new body'
+          update-mode: 'replace'
+          labels: 'xx'
+          emoji: '+1'
