@@ -32,6 +32,17 @@ jobs:
 #          title: 'My Tracking Dashboard'
 #          body: "currently deployed ${{env.environmentSpecificTag}} ${{ github.sha }}"
 #          update-mode: 'replace'
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: 1
+          body-includes: "currently deployed dev":
+      - run: |
+          echo ${{ steps.fc.outputs.comment-id }}
+          echo ${{ steps.fc.outputs.comment-body }}
+          echo ${{ steps.fc.outputs.comment-author }}
+          echo ${{ steps.fc.outputs.comment-created-at }}
       - name: Update comment
         uses: actions-cool/issues-helper@v3
         with:
@@ -39,4 +50,5 @@ jobs:
           token: ${{ secrets.TOKEN }}
           issue-number: 1
           comment-id: "1592555919"
+          body: "currently deployed ${{env.environmentSpecificTag}} ${{ github.sha }}"
           emoji: 'eyes'
