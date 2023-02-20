@@ -25,8 +25,6 @@ jobs:
           token: ${{ secrets.TOKEN }}
           issue-number: 1
           state: 'open'
-          title: 'Updated the issue'
-          body: 'new body'
+          title: 'My Tracking Dashboard'
+          body: "new body ${{ github.sha }}"
           update-mode: 'replace'
-          labels: 'xx'
-          emoji: '+1'
