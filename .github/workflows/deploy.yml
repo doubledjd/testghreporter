@@ -37,7 +37,7 @@ jobs:
         id: fc
         with:
           issue-number: 1
-          body-includes: "currently deployed dev":
+          body-includes: "currently deployed dev"
       - run: |
           echo ${{ steps.fc.outputs.comment-id }}
           echo ${{ steps.fc.outputs.comment-body }}
