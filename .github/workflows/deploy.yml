@@ -22,13 +22,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Update Dashboard
+#      - name: Update Dashboard
+#        uses: actions-cool/issues-helper@v3
+#        with:
+#          actions: 'update-issue'
+#          token: ${{ secrets.TOKEN }}
+#          issue-number: 1
+#          state: 'open'
+#          title: 'My Tracking Dashboard'
+#          body: "currently deployed ${{env.environmentSpecificTag}} ${{ github.sha }}"
+#          update-mode: 'replace'
+      - name: Update comment
         uses: actions-cool/issues-helper@v3
         with:
-          actions: 'update-issue'
+          actions: 'update-comment'
           token: ${{ secrets.TOKEN }}
-          issue-number: 1
-          state: 'open'
-          title: 'My Tracking Dashboard'
-          body: "currently deployed ${{env.environmentSpecificTag}} ${{ github.sha }}"
-          update-mode: 'replace'
+          comment-id: "1#issue-1592555919"
+          emoji: 'eyes'
