@@ -36,6 +36,8 @@ jobs:
     with:
       imageTagToDeploy: ${{ github.sha }}
       environmentToDeployTo: dev
+    secrets:
+      TOKEN: ${{ secrets.TOKEN }}
 
   DeployStage:
     name: Deploy to Stage
@@ -44,6 +46,8 @@ jobs:
     with:
       imageTagToDeploy: ${{ github.sha }}
       environmentToDeployTo: stage
+    secrets:
+      TOKEN: ${{ secrets.TOKEN }}
 
   DeployProd:
     name: Deploy to Prod
@@ -52,3 +56,5 @@ jobs:
     with:
       imageTagToDeploy: ${{ github.sha }}
       environmentToDeployTo: prod
+    secrets:
+      TOKEN: ${{ secrets.TOKEN }}

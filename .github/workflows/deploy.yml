@@ -9,6 +9,9 @@ on:
       imageTagToDeploy:
         required: true
         type: string
+    secrets:
+      TOKEN:
+        required: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
