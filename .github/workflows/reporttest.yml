@@ -32,7 +32,7 @@ jobs:
   DeployDev:
     name: Deploy to Dev
     needs: CI
-    uses: ./.github/workflows/deploy-workflow.yml
+    uses: ./.github/workflows/deploy.yml
     with:
       imageTagToDeploy: ${{ github.sha }}
       environmentToDeployTo: dev
