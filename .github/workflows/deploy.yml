@@ -1,0 +1,31 @@
+name: Deploy workflow
+
+on:
+  workflow_call:
+    inputs:
+      environmentToDeployTo:
+        required: true
+        type: string
+      imageTagToDeploy:
+        required: true
+        type: string
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environmentToDeployTo  }}
+    env:
+      imageTagToDeploy: ${{ inputs.imageTagToDeploy }}
+      environmentSpecificTag: ${{ inputs.environmentToDeployTo }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Update Dashboard
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'update-issue'
+          token: ${{ secrets.TOKEN }}
+          issue-number: 1
+          state: 'open'
+          title: 'My Tracking Dashboard'
+          body: "currently deployed ${{env.environmentSpecificTag}} ${{ github.sha }}"
+          update-mode: 'replace'

@@ -11,20 +11,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  hello:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: my-step
         run: echo "Hello World!"
-      - name: Update issue
-        uses: actions-cool/issues-helper@v3
-        with:
-          actions: 'update-issue'
-          token: ${{ secrets.TOKEN }}
-          issue-number: 1
-          state: 'open'
-          title: 'My Tracking Dashboard'
-          body: "new body ${{ github.sha }}"
-          update-mode: 'replace'
+#      - name: Update issue
+#        uses: actions-cool/issues-helper@v3
+#        with:
+#          actions: 'update-issue'
+#          token: ${{ secrets.TOKEN }}
+#          issue-number: 1
+#          state: 'open'
+#          title: 'My Tracking Dashboard'
+#          body: "currently deployed ${{ github.sha }}"
+#          update-mode: 'replace'
+
+  DeployDev:
+    name: Deploy to Dev
+    needs: CI
+    uses: ./.github/workflows/deploy-workflow.yml
+    with:
+      imageTagToDeploy: ${{ github.sha }}
+      environmentToDeployTo: dev
+
+  DeployStage:
+    name: Deploy to Stage
+    needs: [CI, DeployDev]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      imageTagToDeploy: ${{ github.sha }}
+      environmentToDeployTo: stage
+
+  DeployProd:
+    name: Deploy to Prod
+    needs: [CI, DeployStage]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      imageTagToDeploy: ${{ github.sha }}
+      environmentToDeployTo: prod
