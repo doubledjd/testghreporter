@@ -28,7 +28,7 @@ jobs:
       - name: Get current date
         id: date
         run: |
-          echo "dateval=$(date::$(date +'%Y-%m-%d')"" >>$GITHUB_OUTPUT
+          echo "dateval=$(date::$(date +'%Y-%m-%d')" >>$GITHUB_OUTPUT
       - name: Update Dashboard
         uses: actions-cool/issues-helper@v3
         with:
